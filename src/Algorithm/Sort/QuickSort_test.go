@@ -6,8 +6,8 @@ import (
 )
 
 func TestQucikSort(t *testing.T) {
-	v := Test.SortTest(QucikSort)
+	v := Test.SortTest(QucikSort, t)
 	if !v {
-		t.Errorf("QuickSort is error")
+		t.Errorf("QuickSort appear error")
 	}
 }

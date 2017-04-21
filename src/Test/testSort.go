@@ -3,10 +3,11 @@ package Test
 import (
 	"math/rand"
 	"sort"
+	"testing"
 	"time"
 )
 
-const testLen int = 10
+const testLen int = 100
 
 func getSlice() []map[string][]int {
 	sliceMap := make([]map[string][]int, testLen)
@@ -40,12 +41,15 @@ func equal(init, sorted []int) bool {
 	return true
 }
 
-func SortTest(fn func([]int) []int) bool {
+func SortTest(fn func([]int) []int, t *testing.T) bool {
 	sliceMap := getSlice()
 	for _, v := range sliceMap {
 		init, initStatus := v["init"]
 		sorted, sortedStatus := v["sorted"]
+		attention := make([]int, len(init))
+		copy(attention, init)
 		if !(initStatus && sortedStatus && equal(fn(init), sorted)) {
+			t.Errorf("%v\n对上面数组进行排序时出现错误", attention)
 			return false
 		}
 	}
